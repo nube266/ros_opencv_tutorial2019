@@ -8,17 +8,17 @@
 #include <cv_bridge/cv_bridge.h>
 
 // range of color to be detected a color ball
-cv::Scalar colorLower(80, 50, 50);
-cv::Scalar colorUpper(150, 255, 255);
+cv::Scalar colorLower(/**Please fill**/);
+cv::Scalar colorUpper(/**Please fill**/);
 
 void detectColorBall(cv::Mat& image) {
     // Convert BGR to HSV
     cv::Mat hsv;
-    cv::cvtColor(image, hsv, CV_BGR2HSV);
+    cv::cvtColor(image, hsv, /**Please fill**/);
 
     // Create a mask image to segment the original image based on its color
     cv::Mat mask;
-    cv::inRange(hsv, colorLower, colorUpper, mask); // Use hue value to specify color
+    cv::inRange(hsv, /**Please fill**/, mask); // Use hue value to specify color
 
     // Reduce noise from the mask image
     cv::morphologyEx(mask, mask, cv::MORPH_OPEN,   cv::Mat(), cv::Point(-1, -1), 2);
@@ -26,21 +26,12 @@ void detectColorBall(cv::Mat& image) {
     cv::GaussianBlur(mask, mask, cv::Size(-1, -1), 1, 1);
 
     // Apply the Hough transform to find circles in the mask image
-    std::vector<cv::Vec3f> circles;
-    cv::HoughCircles(mask, circles, CV_HOUGH_GRADIENT, 1, mask.rows, 20, 20, 10, 100);
+    cv::HoughCircles(mask, /**Please fill**/);
 
     // Draw the found circles
-    cv::Mat maskImg;
-    cv::cvtColor(mask, maskImg, CV_GRAY2BGR);
-    for (int i = 0; i < circles.size(); i++) {
-        cv::Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
-        int radius = cvRound(circles[i][2]);
-        circle(image, center, radius, cv::Scalar(0, 0, 255), 3, 8, 0);
-        circle(maskImg, center, radius, cv::Scalar(0, 0, 255), 3, 8, 0);
-    }
-    cv::imshow("Image", image);
-    cv::waitKey(10);
-    cv::imshow("Mask", maskImg);
+    /**Please fill**/
+
+    cv::imshow(/**Please fill**/);
     cv::waitKey(10);
 }
 
