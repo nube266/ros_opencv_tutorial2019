@@ -7,6 +7,7 @@
 #include <opencv2/core/core.hpp>
 #include <cv_bridge/cv_bridge.h>
 
+// range of color to be detected a color ball
 cv::Scalar colorLower(80, 50, 50);
 cv::Scalar colorUpper(150, 255, 255);
 
@@ -55,7 +56,8 @@ int main(int argc, char** argv) {
     ros::init(argc, argv, "ros_opencv_tutorial");
     ros::NodeHandle nh;
 
-    ros::Subscriber cameraImageSub = nh.subscribe("usb_cam/image_raw", 1, cameraImageCb);
+    //ros::Subscriber cameraImageSub = nh.subscribe("usb_cam/image_raw", 1, cameraImageCb); // Use this topic if you have not calibrated your camera
+    ros::Subscriber cameraImageSub = nh.subscribe("usb_cam/image_rect_color", 1, cameraImageCb);
 
     ros::spin();
 }
